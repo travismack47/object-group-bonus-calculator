@@ -51,11 +51,13 @@ console.log('array of employee data: ',  employees );
 function calculateIndividualEmployeeBonus( employee ) {  
   // your logic here
   let bonusPercentage = 0;
+ 
   let employeeWithStats = {
     name: employee.name,
     bonusPercentage: 0,
     totalCompensation: 0,
     totalBonus: 0
+   
   }
   if (employee.reviewRating === 3) {
    bonusPercentage = .04;
@@ -68,18 +70,38 @@ function calculateIndividualEmployeeBonus( employee ) {
   }
   else if (employee.reviewRating === 2) {
     bonusPercentage = 0;
+  };
+  
+  if (employee.employeeNumber.length === 4) {
+    bonusPercentage += .05;
+  };
+
+  if (Number(employee.annualSalary) > 65000) {
+    bonusPercentage = -.01;
   }
-  //console.log(bonusPercentage);
+    
+
+
+
+  if (bonusPercentage > .13) {
+    bonusPercentage = .13;
+  }
+  else if (bonusPercentage < 0) {
+    bonusPercentage = 0;
+  };
+
   employeeWithStats.bonusPercentage = bonusPercentage;
   employeeWithStats.totalBonus = bonusPercentage * Number(employee.annualSalary)
   employeeWithStats.totalCompensation = Number(employee.annualSalary) + employeeWithStats.totalBonus;
+
+  console.log(bonusPercentage);
 
   return employeeWithStats;
 
   
 }
 
-console.log(calculateIndividualEmployeeBonus(employees[1]));
+console.log(calculateIndividualEmployeeBonus(employees[0]));
 
 
 
@@ -93,6 +115,7 @@ function loopThroughEmployees(array) {
 
 
 loopThroughEmployees(employees);
+
 /*
 ### Individual Bonus Rules
 
@@ -115,3 +138,4 @@ Write a declared function that takes in one **Employee** object (as an argument 
 * The `totalCompensation` property should be the adjusted annual compensation (base annual + bonus)
 * The `totalBonus` should be the employee's total bonus rounded to the nearest dollar.
 */
+
